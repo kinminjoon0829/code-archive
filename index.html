@@ -39,8 +39,23 @@
     <div id="container">
         <div class="code-item C">
             <span class="tag">C</span>
-            <h3>1. 버블 정렬</h3>
-            <pre>/* 코드 생략 가능 */</pre>
+            <h3>1. 버블 정렬 (Bubble Sort)</h3>
+            <pre>#include &lt;stdio.h&gt;
+int main() {
+    int n, t; scanf("%d", &n);
+    int arr[100];
+    for(int i=0; i&lt;n; i++) scanf("%d", &arr[i]);
+    for(int i=0; i&lt;n-1; i++) {
+        for(int j=0; j&lt;n-i-1; j++) {
+            if(arr[j] > arr[j+1]) {
+                t = arr[j]; arr[j] = arr[j+1]; arr[j+1] = t;
+            }
+        }
+    }
+    for(int i=0; i&lt;n; i++) printf("%d ", arr[i]);
+    return 0;
+}</pre>
+            <div class="example-box output">Input: 5 / 5 2 4 1 3 -> Output: 1 2 3 4 5</div>
             <hr>
             <h3>2. 최빈값 찾기 (Mode)</h3>
             <pre>#include &lt;stdio.h&gt;
@@ -57,7 +72,7 @@ int main() {
 }</pre>
             <div class="example-box output">Input: 5 / 1 2 2 3 1 -> Output: 최빈값: 1</div>
             <hr>
-            <h3>3. 행렬 곱셈</h3>
+            <h3>3. 행렬 곱셈 (Matrix Multiplication)</h3>
             <pre>#include &lt;stdio.h&gt;
 int main() {
     int r1, c1, r2, c2; scanf("%d %d %d %d", &r1, &c1, &r2, &c2);
@@ -74,14 +89,36 @@ int main() {
         <div class="code-item C++">
             <span class="tag">C++</span>
             <h3>1. 선택 정렬 (Selection Sort)</h3>
-            <pre>/* 소스코드 */</pre>
+            <pre>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+int main() {
+    int n; cin >> n; vector&lt;int&gt; v(n);
+    for(int i=0; i&lt;n; i++) cin >> v[i];
+    for(int i=0; i&lt;n-1; i++) {
+        int m = i;
+        for(int j=i+1; j&lt;n; j++) if(v[j] < v[m]) m = j;
+        swap(v[i], v[m]);
+    }
+    for(int x : v) cout << x << " ";
+    return 0;
+}</pre>
             <div class="example-box output">Input: 4 / 4 1 3 2 -> Output: 1 2 3 4</div>
             <hr>
             <h3>2. 최빈값 찾기 (Map 활용)</h3>
-            <pre>/* 소스코드 */</pre>
+            <pre>#include &lt;iostream&gt;
+#include &lt;map&gt;
+using namespace std;
+int main() {
+    int n, x, maxC = 0, mode; cin >> n;
+    map&lt;int, int&gt; m;
+    for(int i=0; i&lt;n; i++) { cin >> x; m[x]++; if(m[x] > maxC) { maxC = m[x]; mode = x; } }
+    cout << "최빈값: " << mode;
+    return 0;
+}</pre>
             <div class="example-box output">Input: 3 / 10 20 10 -> Output: 최빈값: 10</div>
             <hr>
-            <h3>3. 행렬 곱셈</h3>
+            <h3>3. 행렬 곱셈 (Matrix Multiplication)</h3>
             <pre>#include &lt;iostream&gt;
 #include &lt;vector&gt;
 using namespace std;
@@ -97,21 +134,28 @@ int main() {
             <div class="example-box output">Input: 2 2 2 2 / 1 0 0 1 / 2 3 4 5 -> Output: 2 3 \n 4 5</div>
             <hr>
             <h3>4. 포인터 배열 역순 출력</h3>
-            <pre>/* 소스코드 */</pre>
+            <pre>#include &lt;iostream&gt;
+using namespace std;
+int main() {
+    int n; cin >> n; int arr[100]; int *ptr = arr;
+    for(int i=0; i&lt;n; i++) cin >> *(ptr + i);
+    for(int i=n-1; i>=0; i--) cout << *(ptr + i) << " ";
+    return 0;
+}</pre>
             <div class="example-box output">Input: 3 / 10 20 30 -> Output: 30 20 10</div>
         </div>
 
         <div class="code-item PY">
             <span class="tag">PY</span>
             <h3>1. 정렬 및 최빈값</h3>
-            <pre>/* 소스코드 */</pre>
+            <pre>from collections import Counter
+data = list(map(int, input().split()))
+data.sort()
+mode = Counter(data).most_common(1)[0][0]
+print(f"정렬: {data}, 최빈값: {mode}")</pre>
             <div class="example-box output">Input: 1 3 2 3 -> Output: 정렬: [1, 2, 3, 3], 최빈값: 3</div>
             <hr>
-            <h3>2. 제어문 (If/For)</h3>
-            <pre>/* 소스코드 */</pre>
-            <div class="example-box output">Input: 5 -> Output: 0 1 2 3 4</div>
-            <hr>
-            <h3>3. 행렬 곱셈 (Numpy)</h3>
+            <h3>2. 행렬 곱셈 (Numpy 활용)</h3>
             <pre>import numpy as np
 r1, c1 = map(int, input().split())
 a = np.array([list(map(int, input().split())) for _ in range(r1)])
@@ -119,6 +163,28 @@ r2, c2 = map(int, input().split())
 b = np.array([list(map(int, input().split())) for _ in range(r2)])
 print(np.dot(a, b))</pre>
             <div class="example-box output">Input: 2 2 / 1 2 / 3 4 / 2 2 / 5 6 / 7 8 -> Output: [[19 22] [43 50]]</div>
+            <hr>
+            <h3>3. 제어문 (If/For)</h3>
+            <pre>n = int(input())
+if n > 0:
+    for i in range(n): print(i, end=" ")
+else: print("음수입니다")</pre>
+            <div class="example-box output">Input: 5 -> Output: 0 1 2 3 4</div>
+        </div>
+
+        <div class="code-item C#">
+            <span class="tag">C#</span>
+            <h3>배열 평균 계산 및 입출력</h3>
+            <pre>using System;
+using System.Linq;
+class Program {
+    static void Main() {
+        int n = int.Parse(Console.ReadLine());
+        int[] arr = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+        Console.WriteLine($"평균: {arr.Average():F2}");
+    }
+}</pre>
+            <div class="example-box output">Input: 3 / 10 20 30 -> Output: 평균: 20.00</div>
         </div>
 
         <div class="code-item SETTINGS">
@@ -130,14 +196,14 @@ print(np.dot(a, b))</pre>
    - [Python 개발], [.NET 데스크톱 개발] 체크
 2. 환경 설정 (도구 > 옵션):
    - 텍스트 편집기 > 모든 언어 > 줄 번호 체크
-   - 프로젝트 및 솔루션 > 위치: 기본 저장 경로(예: D:\KhuCode) 지정
+   - 프로젝트 및 솔루션 > 위치: 기본 저장 경로 설정
 3. C++ 필수 프로젝트 설정:
    - 프로젝트 우클릭 > 속성 > C/C++ > 언어 > C++ 언어 표준: ISO C++20 표준
    - SDL 검사: 아니요 (/sdl-) (scanf 보안 경고 해결용)</pre>
             <hr>
             <h3>🚀 Git 업데이트</h3>
             <pre>git add .
-git commit -m "Integrated all examples and VS2026 settings"
+git commit -m "Integrated all codes and VS2026 settings"
 git push</pre>
         </div>
     </div>
