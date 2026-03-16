@@ -3,22 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>경희대 산경공 코드 사전</title>
+    <title>소스코드 모음</title>
     <style>
         body { font-family: 'Pretendard', sans-serif; padding: 20px; line-height: 1.6; background: #f8f9fa; color: #333; }
         .menu { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; position: sticky; top: 0; background: #f8f9fa; padding: 10px 0; z-index: 100; border-bottom: 1px solid #ddd; }
         button { padding: 10px 18px; border: 1px solid #dee2e6; border-radius: 6px; cursor: pointer; background: white; font-weight: 600; transition: 0.2s; }
         button:hover { background: #e9ecef; }
-        button.active { background: #003d7c; color: white; border-color: #003d7c; } /* 경희대 블루 느낌 */
+        button.active { background: #c41230; color: white; border-color: #c41230; } /* 경희대 레드 */
         
         .code-item { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; display: none; border: 1px solid #e0e0e0; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .tag { display: inline-block; background: #e7f1ff; color: #007bff; padding: 3px 10px; border-radius: 4px; font-size: 0.85em; font-weight: bold; margin-bottom: 10px; }
+        .tag { display: inline-block; background: #fdf2f2; color: #c41230; padding: 3px 10px; border-radius: 4px; font-size: 0.85em; font-weight: bold; margin-bottom: 10px; }
         
         h3 { margin-top: 0; color: #222; }
         .section-title { font-weight: bold; margin-top: 15px; margin-bottom: 5px; color: #555; display: flex; align-items: center; }
-        .section-title::before { content: '•'; margin-right: 8px; color: #007bff; }
-
-        /* 코드 및 실행 예제 창 */
         pre { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 6px; overflow-x: auto; font-size: 0.9em; }
         .example-box { background: #f1f3f5; border-left: 4px solid #adb5bd; padding: 10px 15px; font-family: monospace; white-space: pre-wrap; margin-bottom: 10px; }
         .output { border-left-color: #40c057; background: #ebfbee; }
@@ -41,74 +38,110 @@
     </div>
 
     <div id="container">
-        <div class="code-item SETTINGS">
-            <span class="tag">SETTINGS</span>
-            <h3>🚀 Git 업데이트 3단계 콤보</h3>
-            <pre>git add .
-git commit -m "내용 입력"
-git push</pre>
-        </div>
-
         <div class="code-item C">
             <span class="tag">C</span>
-            <h3>버블 정렬 (Bubble Sort)</h3>
+            <h3>포인터 활용 값 교환 (Swap)</h3>
             <div class="section-title">Source Code</div>
             <pre>#include &lt;stdio.h&gt;
 
-int main() {
-    int n, temp;
-    scanf("%d", &n);
-    int arr[n];
-    for(int i=0; i&lt;n; i++) scanf("%d", &arr[i]);
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
 
-    for(int i=0; i&lt;n-1; i++) {
-        for(int j=0; j&lt;n-i-1; j++) {
-            if(arr[j] > arr[j+1]) {
-                temp = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = temp;
-            }
-        }
-    }
-    for(int i=0; i&lt;n; i++) printf("%d ", arr[i]);
+int main() {
+    int x, y;
+    scanf("%d %d", &x, &y);
+    swap(&x, &y);
+    printf("%d %d", x, y);
     return 0;
 }</pre>
             <div class="section-title">Input Example</div>
-            <div class="example-box">5
-5 2 4 1 3</div>
+            <div class="example-box">10 20</div>
             <div class="section-title">Output Example</div>
-            <div class="example-box output">1 2 3 4 5</div>
+            <div class="example-box output">20 10</div>
         </div>
 
         <div class="code-item C++">
             <span class="tag">C++</span>
-            <h3>선택 정렬 (Selection Sort)</h3>
+            <h3>포인터로 배열 접근 및 역순 출력</h3>
             <div class="section-title">Source Code</div>
             <pre>#include &lt;iostream&gt;
-#include &lt;vector&gt;
 using namespace std;
 
 int main() {
     int n;
     cin >> n;
-    vector&lt;int&gt; a(n);
-    for(int i=0; i&lt;n; i++) cin >> a[i];
+    int arr[100];
+    int *ptr = arr; 
 
-    for(int i=0; i&lt;n-1; i++) {
-        int min_idx = i;
-        for(int j=i+1; j&lt;n; j++)
-            if(a[j] < a[min_idx]) min_idx = j;
-        swap(a[i], a[min_idx]);
-    }
+    for(int i=0; i&lt;n; i++) cin >> *(ptr + i);
 
-    for(int i=0; i&lt;n; i++) cout << a[i] << " ";
+    for(int i=n-1; i>=0; i--) cout << *(ptr + i) << " ";
     return 0;
 }</pre>
             <div class="section-title">Input Example</div>
-            <div class="example-box">6
-10 5 8 2 1 7</div>
+            <div class="example-box">3
+1 2 3</div>
             <div class="section-title">Output Example</div>
-            <div class="example-box output">1 2 5 7 8 10</div>
+            <div class="example-box output">3 2 1</div>
+        </div>
+
+        <div class="code-item PY">
+            <span class="tag">PY</span>
+            <h3>입력받은 숫자 정렬 (Sort)</h3>
+            <div class="section-title">Source Code</div>
+            <pre># 여러 개의 숫자를 입력받아 리스트로 저장
+n = int(input("데이터 개수: "))
+data = list(map(int, input("숫자들을 입력: ").split()))
+
+# 파이썬 내장 정렬 함수 사용
+data.sort() 
+
+# 결과 출력
+print("정렬 결과:", *data)</pre>
+            <div class="section-title">Input Example</div>
+            <div class="example-box">5
+5 2 9 1 7</div>
+            <div class="section-title">Output Example</div>
+            <div class="example-box output">1 2 5 7 9</div>
+        </div>
+
+        <div class="code-item C#">
+            <span class="tag">C#</span>
+            <h3>C# 콘솔 입력 및 형변환</h3>
+            <div class="section-title">Source Code</div>
+            <pre>using System;
+
+class Program {
+    static void Main() {
+        Console.Write("정수 입력: ");
+        string input = Console.ReadLine();
+        if (int.TryParse(input, out int result)) {
+            Console.WriteLine($"결과값: {result * 10}");
+        }
+    }
+}</pre>
+        </div>
+
+        <div class="code-item HTML">
+            <span class="tag">HTML</span>
+            <h3>웹페이지 제작 핵심 문법</h3>
+            <div class="section-title">Viewport (모바일 최적화)</div>
+            <pre>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</pre>
+            <div class="section-title">Filter (카테고리 핵심)</div>
+            <pre>display: none; // 평소엔 숨김
+display: block; // 버튼 누르면 나타남</pre>
+        </div>
+
+        <div class="code-item SETTINGS">
+            <span class="tag">SETTINGS</span>
+            <h3>🚀 업데이트 마법의 3줄</h3>
+            <p>수정 후 터미널에 아래 내용을 순서대로 입력하세요.</p>
+            <pre>git add .
+git commit -m "내용 입력 (한글 가능)"
+git push</pre>
         </div>
     </div>
 
@@ -121,7 +154,6 @@ int main() {
                 if (items[i].className.indexOf(c) > -1) items[i].style.display = "block";
             }
             
-            // 버튼 활성화 상태 변경
             var btns = document.getElementById("menuBar").getElementsByTagName("button");
             for (var i = 0; i < btns.length; i++) {
                 btns[i].classList.remove("active");
@@ -130,7 +162,6 @@ int main() {
                 }
             }
         }
-        // 초기 로드 시 전체 보기
         filterSelection('all');
     </script>
 </body>
