@@ -46,44 +46,34 @@
             <span class="tag">C</span>
             <h3>버블 정렬 (Bubble Sort)</h3>
             <pre>#include &lt;stdio.h&gt;
-
 int main() {
-    int n, temp;
-    scanf("%d", &n);
+    int n; scanf("%d", &n);
     int arr[n];
     for(int i=0; i&lt;n; i++) scanf("%d", &arr[i]);
-
     for(int i=0; i&lt;n-1; i++) {
         for(int j=0; j&lt;n-i-1; j++) {
             if(arr[j] > arr[j+1]) {
-                temp = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = temp;
+                int t = arr[j]; arr[j] = arr[j+1]; arr[j+1] = t;
             }
         }
     }
     for(int i=0; i&lt;n; i++) printf("%d ", arr[i]);
     return 0;
 }</pre>
-            <div class="sub-header">입출력 예제</div>
-            <div class="example-box">Input: 5 / 5 2 4 1 3<br>Output: 1 2 3 4 5</div>
+            <div class="example-box">Input: 3 / 30 10 20<br>Output: 10 20 30</div>
             <hr>
             <h3>포인터 값 교환 (Swap)</h3>
             <pre>#include &lt;stdio.h&gt;
-
 void swap(int *a, int *b) {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
+    int temp = *a; *a = *b; *b = temp;
 }
-
 int main() {
-    int x, y;
-    scanf("%d %d", &x, &y);
+    int x, y; scanf("%d %d", &x, &y);
     swap(&x, &y);
     printf("%d %d", x, y);
     return 0;
 }</pre>
+            <div class="example-box">Input: 5 9<br>Output: 9 5</div>
         </div>
 
         <div class="code-item C++">
@@ -92,87 +82,84 @@ int main() {
             <pre>#include &lt;iostream&gt;
 #include &lt;vector&gt;
 using namespace std;
-
 int main() {
     int n; cin >> n;
-    vector&lt;int&gt; a(n);
-    for(int i=0; i&lt;n; i++) cin >> a[i];
-
+    vector&lt;int&gt; v(n);
+    for(int i=0; i&lt;n; i++) cin >> v[i];
     for(int i=0; i&lt;n-1; i++) {
-        int min_idx = i;
-        for(int j=i+1; j&lt;n; j++)
-            if(a[j] < a[min_idx]) min_idx = j;
-        swap(a[i], a[min_idx]);
+        int m = i;
+        for(int j=i+1; j&lt;n; j++) if(v[j] < v[m]) m = j;
+        swap(v[i], v[m]);
     }
-    for(int x : a) cout << x << " ";
+    for(int x : v) cout << x << " ";
     return 0;
 }</pre>
-            <hr>
-            <h3>포인터 배열 역순 출력</h3>
-            <pre>#include &lt;iostream&gt;
-using namespace std;
-
-int main() {
-    int n; cin >> n;
-    int arr[100];
-    int *ptr = arr; 
-
-    for(int i=0; i&lt;n; i++) cin >> *(ptr + i);
-
-    for(int i=n-1; i>=0; i--) cout << *(ptr + i) << " ";
-    return 0;
-}</pre>
+            <div class="example-box">Input: 4 / 4 1 3 2<br>Output: 1 2 3 4</div>
         </div>
 
         <div class="code-item C#">
             <span class="tag">C#</span>
-            <h3>배열 입력 및 평균 계산</h3>
+            <h3>배열 평균 계산</h3>
             <pre>using System;
 using System.Linq;
-
 class Program {
     static void Main() {
         int n = int.Parse(Console.ReadLine());
-        int[] numbers = Console.ReadLine().Split(' ')
-                               .Select(int.Parse).ToArray();
-
-        double average = numbers.Average();
-        Console.WriteLine($"{n}개의 평균: {average:F2}");
+        int[] arr = Console.ReadLine().Split(' ').Select(int.Parse).ToArray();
+        Console.WriteLine($"{arr.Average():F2}");
     }
 }</pre>
-            <div class="sub-header">입력 예시</div>
-            <div class="example-box">3<br>10 20 35</div>
-            <div class="sub-header">출력 예시</div>
-            <div class="example-box output">3개의 평균: 21.67</div>
+            <div class="example-box">Input: 2 / 10 25<br>Output: 17.50</div>
         </div>
 
         <div class="code-item PY">
             <span class="tag">PY</span>
-            <h3>입력받은 숫자 리스트 정렬</h3>
-            <pre># 데이터 개수와 숫자 리스트 입력
-n = int(input())
-data = list(map(int, input().split()))
-
-# 오름차순 정렬
-data.sort() 
-
-# 결과 출력
-print(*data)</pre>
-            <div class="sub-header">실행 예시</div>
-            <div class="example-box">Input: 5 / 9 1 5 2 4<br>Output: 1 2 4 5 9</div>
+            <h3>If문 & For문 성적 판별</h3>
+            <pre>scores = list(map(int, input("점수들을 입력: ").split()))
+for s in scores:
+    if s >= 90: print(f"{s}: A")
+    elif s >= 80: print(f"{s}: B")
+    else: print(f"{s}: F")</pre>
+            <div class="example-box">Input: 95 82 70<br>Output: 95: A, 82: B, 70: F</div>
         </div>
 
         <div class="code-item HTML">
             <span class="tag">HTML</span>
-            <h3>반응형 메타 태그</h3>
-            <pre>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</pre>
+            <h3>주요 태그 쓰임새</h3>
+            <pre>&lt;h2&gt;제목 2단계&lt;/h2&gt; &lt;div&gt;구역 나누기&lt;/div&gt; &lt;button&gt;버튼&lt;/button&gt; &lt;pre&gt;코드 표시&lt;/pre&gt; </pre>
+        </div>
+
+        <div class="code-item CSS">
+            <span class="tag">CSS</span>
+            <h3>자주 쓰는 스타일링</h3>
+            <pre>/* 1. 중앙 정렬 및 여백 */
+.box { margin: 0 auto; padding: 20px; }
+
+/* 2. Flexbox 레이아웃 (가로 정렬) */
+.container { display: flex; justify-content: space-between; }</pre>
+        </div>
+
+        <div class="code-item JAVA">
+            <span class="tag">JAVA</span>
+            <h3>기본 출력 및 객체 생성</h3>
+            <pre>// 1. Hello World
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello Java!");
+    }
+}
+
+// 2. Scanner 입력
+import java.util.Scanner;
+Scanner sc = new Scanner(System.in);
+int n = sc.nextInt();</pre>
         </div>
 
         <div class="code-item SETTINGS">
             <span class="tag">SETTINGS</span>
-            <h3>🚀 업데이트 명령어</h3>
+            <h3>🚀 업데이트 방법</h3>
             <pre>git add .
-git commit -m "내용"
+git commit -m "Update"
 git push</pre>
         </div>
 
