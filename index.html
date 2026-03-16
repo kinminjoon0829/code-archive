@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>소스코드 모음</title>
+    <title>Code Archive</title>
     <style>
         body { font-family: 'Pretendard', sans-serif; padding: 20px; line-height: 1.6; background: #f8f9fa; color: #333; }
         .menu { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; position: sticky; top: 0; background: #f8f9fa; padding: 10px 0; z-index: 100; border-bottom: 1px solid #ddd; }
         button { padding: 10px 18px; border: 1px solid #dee2e6; border-radius: 6px; cursor: pointer; background: white; font-weight: 600; transition: 0.2s; }
         button:hover { background: #e9ecef; }
-        button.active { background: #c41230; color: white; border-color: #c41230; } /* 경희대 레드 */
+        button.active { background: #c41230; color: white; border-color: #c41230; }
         
-        .code-item { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; display: none; border: 1px solid #e0e0e0; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .code-item { background: white; padding: 20px; border-radius: 12px; margin-bottom: 30px; display: none; border: 1px solid #e0e0e0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .tag { display: inline-block; background: #fdf2f2; color: #c41230; padding: 3px 10px; border-radius: 4px; font-size: 0.85em; font-weight: bold; margin-bottom: 10px; }
         
-        h3 { margin-top: 0; color: #222; }
-        .section-title { font-weight: bold; margin-top: 15px; margin-bottom: 5px; color: #555; display: flex; align-items: center; }
-        pre { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 6px; overflow-x: auto; font-size: 0.9em; }
-        .example-box { background: #f1f3f5; border-left: 4px solid #adb5bd; padding: 10px 15px; font-family: monospace; white-space: pre-wrap; margin-bottom: 10px; }
-        .output { border-left-color: #40c057; background: #ebfbee; }
+        h3 { margin: 0 0 15px 0; color: #111; display: flex; align-items: center; }
+        h3::before { content: '📄'; margin-right: 8px; }
+        
+        pre { background: #282c34; color: #abb2bf; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 0.9em; border: 1px solid #111; }
+        .sub-header { font-weight: bold; font-size: 0.9em; color: #666; margin-top: 15px; margin-bottom: 5px; }
+        .example-box { background: #f1f3f5; border-left: 4px solid #adb5bd; padding: 12px; font-family: 'Consolas', monospace; font-size: 0.9em; margin: 10px 0; }
+        .output { border-left-color: #40c057; background: #ebfbee; color: #2b8a3e; }
+        hr { border: 0; height: 1px; background: #eee; margin: 30px 0; }
     </style>
 </head>
 <body>
@@ -38,10 +41,34 @@
     </div>
 
     <div id="container">
+        
         <div class="code-item C">
             <span class="tag">C</span>
-            <h3>포인터 활용 값 교환 (Swap)</h3>
-            <div class="section-title">Source Code</div>
+            <h3>버블 정렬 (Bubble Sort)</h3>
+            <pre>#include &lt;stdio.h&gt;
+
+int main() {
+    int n, temp;
+    scanf("%d", &n);
+    int arr[n];
+    for(int i=0; i&lt;n; i++) scanf("%d", &arr[i]);
+
+    for(int i=0; i&lt;n-1; i++) {
+        for(int j=0; j&lt;n-i-1; j++) {
+            if(arr[j] > arr[j+1]) {
+                temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+    for(int i=0; i&lt;n; i++) printf("%d ", arr[i]);
+    return 0;
+}</pre>
+            <div class="sub-header">입출력 예제</div>
+            <div class="example-box">Input: 5 / 5 2 4 1 3<br>Output: 1 2 3 4 5</div>
+            <hr>
+            <h3>포인터 값 교환 (Swap)</h3>
             <pre>#include &lt;stdio.h&gt;
 
 void swap(int *a, int *b) {
@@ -57,22 +84,36 @@ int main() {
     printf("%d %d", x, y);
     return 0;
 }</pre>
-            <div class="section-title">Input Example</div>
-            <div class="example-box">10 20</div>
-            <div class="section-title">Output Example</div>
-            <div class="example-box output">20 10</div>
         </div>
 
         <div class="code-item C++">
             <span class="tag">C++</span>
-            <h3>포인터로 배열 접근 및 역순 출력</h3>
-            <div class="section-title">Source Code</div>
+            <h3>선택 정렬 (Selection Sort)</h3>
+            <pre>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    int n; cin >> n;
+    vector&lt;int&gt; a(n);
+    for(int i=0; i&lt;n; i++) cin >> a[i];
+
+    for(int i=0; i&lt;n-1; i++) {
+        int min_idx = i;
+        for(int j=i+1; j&lt;n; j++)
+            if(a[j] < a[min_idx]) min_idx = j;
+        swap(a[i], a[min_idx]);
+    }
+    for(int x : a) cout << x << " ";
+    return 0;
+}</pre>
+            <hr>
+            <h3>포인터 배열 역순 출력</h3>
             <pre>#include &lt;iostream&gt;
 using namespace std;
 
 int main() {
-    int n;
-    cin >> n;
+    int n; cin >> n;
     int arr[100];
     int *ptr = arr; 
 
@@ -81,68 +122,60 @@ int main() {
     for(int i=n-1; i>=0; i--) cout << *(ptr + i) << " ";
     return 0;
 }</pre>
-            <div class="section-title">Input Example</div>
-            <div class="example-box">3
-1 2 3</div>
-            <div class="section-title">Output Example</div>
-            <div class="example-box output">3 2 1</div>
-        </div>
-
-        <div class="code-item PY">
-            <span class="tag">PY</span>
-            <h3>입력받은 숫자 정렬 (Sort)</h3>
-            <div class="section-title">Source Code</div>
-            <pre># 여러 개의 숫자를 입력받아 리스트로 저장
-n = int(input("데이터 개수: "))
-data = list(map(int, input("숫자들을 입력: ").split()))
-
-# 파이썬 내장 정렬 함수 사용
-data.sort() 
-
-# 결과 출력
-print("정렬 결과:", *data)</pre>
-            <div class="section-title">Input Example</div>
-            <div class="example-box">5
-5 2 9 1 7</div>
-            <div class="section-title">Output Example</div>
-            <div class="example-box output">1 2 5 7 9</div>
         </div>
 
         <div class="code-item C#">
             <span class="tag">C#</span>
-            <h3>C# 콘솔 입력 및 형변환</h3>
-            <div class="section-title">Source Code</div>
+            <h3>배열 입력 및 평균 계산</h3>
             <pre>using System;
+using System.Linq;
 
 class Program {
     static void Main() {
-        Console.Write("정수 입력: ");
-        string input = Console.ReadLine();
-        if (int.TryParse(input, out int result)) {
-            Console.WriteLine($"결과값: {result * 10}");
-        }
+        int n = int.Parse(Console.ReadLine());
+        int[] numbers = Console.ReadLine().Split(' ')
+                               .Select(int.Parse).ToArray();
+
+        double average = numbers.Average();
+        Console.WriteLine($"{n}개의 평균: {average:F2}");
     }
 }</pre>
+            <div class="sub-header">입력 예시</div>
+            <div class="example-box">3<br>10 20 35</div>
+            <div class="sub-header">출력 예시</div>
+            <div class="example-box output">3개의 평균: 21.67</div>
+        </div>
+
+        <div class="code-item PY">
+            <span class="tag">PY</span>
+            <h3>입력받은 숫자 리스트 정렬</h3>
+            <pre># 데이터 개수와 숫자 리스트 입력
+n = int(input())
+data = list(map(int, input().split()))
+
+# 오름차순 정렬
+data.sort() 
+
+# 결과 출력
+print(*data)</pre>
+            <div class="sub-header">실행 예시</div>
+            <div class="example-box">Input: 5 / 9 1 5 2 4<br>Output: 1 2 4 5 9</div>
         </div>
 
         <div class="code-item HTML">
             <span class="tag">HTML</span>
-            <h3>웹페이지 제작 핵심 문법</h3>
-            <div class="section-title">Viewport (모바일 최적화)</div>
+            <h3>반응형 메타 태그</h3>
             <pre>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</pre>
-            <div class="section-title">Filter (카테고리 핵심)</div>
-            <pre>display: none; // 평소엔 숨김
-display: block; // 버튼 누르면 나타남</pre>
         </div>
 
         <div class="code-item SETTINGS">
             <span class="tag">SETTINGS</span>
-            <h3>🚀 업데이트 마법의 3줄</h3>
-            <p>수정 후 터미널에 아래 내용을 순서대로 입력하세요.</p>
+            <h3>🚀 업데이트 명령어</h3>
             <pre>git add .
-git commit -m "내용 입력 (한글 가능)"
+git commit -m "내용"
 git push</pre>
         </div>
+
     </div>
 
     <script>
@@ -153,13 +186,10 @@ git push</pre>
                 items[i].style.display = "none";
                 if (items[i].className.indexOf(c) > -1) items[i].style.display = "block";
             }
-            
             var btns = document.getElementById("menuBar").getElementsByTagName("button");
             for (var i = 0; i < btns.length; i++) {
                 btns[i].classList.remove("active");
-                if (btns[i].innerText === (c === "" ? "ALL" : c)) {
-                    btns[i].classList.add("active");
-                }
+                if (btns[i].innerText === (c === "" ? "ALL" : c)) btns[i].classList.add("active");
             }
         }
         filterSelection('all');
