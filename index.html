@@ -42,9 +42,9 @@
 
     <div id="container">
         
-        <div class="code-item C">
+        <div class="code-item lang-C">
             <span class="tag">C</span>
-            <h3>버블 정렬 (Bubble Sort)</h3>
+            <h3>1. 버블 정렬 (Bubble Sort)</h3>
             <pre>#include &lt;stdio.h&gt;
 int main() {
     int n; scanf("%d", &n);
@@ -62,23 +62,28 @@ int main() {
 }</pre>
             <div class="example-box">Input: 3 / 30 10 20<br>Output: 10 20 30</div>
             <hr>
-            <h3>포인터 값 교환 (Swap)</h3>
+            <h3>2. 최빈값 구하기 (Mode)</h3>
             <pre>#include &lt;stdio.h&gt;
-void swap(int *a, int *b) {
-    int temp = *a; *a = *b; *b = temp;
-}
 int main() {
-    int x, y; scanf("%d %d", &x, &y);
-    swap(&x, &y);
-    printf("%d %d", x, y);
+    int n, maxCount = 0, mode = 0;
+    scanf("%d", &n);
+    int arr[n], count[101] = {0}; // 0~100 범위 가정
+    for(int i=0; i&lt;n; i++) {
+        scanf("%d", &arr[i]);
+        count[arr[i]]++;
+        if(count[arr[i]] > maxCount) {
+            maxCount = count[arr[i]];
+            mode = arr[i];
+        }
+    }
+    printf("최빈값: %d", mode);
     return 0;
 }</pre>
-            <div class="example-box">Input: 5 9<br>Output: 9 5</div>
         </div>
 
-        <div class="code-item C++">
+        <div class="code-item lang-C++">
             <span class="tag">C++</span>
-            <h3>선택 정렬 (Selection Sort)</h3>
+            <h3>1. 선택 정렬 (Selection Sort)</h3>
             <pre>#include &lt;iostream&gt;
 #include &lt;vector&gt;
 using namespace std;
@@ -94,10 +99,36 @@ int main() {
     for(int x : v) cout << x << " ";
     return 0;
 }</pre>
-            <div class="example-box">Input: 4 / 4 1 3 2<br>Output: 1 2 3 4</div>
+            <hr>
+            <h3>2. 포인터 배열 역순 출력</h3>
+            <pre>#include &lt;iostream&gt;
+using namespace std;
+int main() {
+    int n; cin >> n;
+    int arr[100]; int *ptr = arr;
+    for(int i=0; i&lt;n; i++) cin >> *(ptr + i);
+    for(int i=n-1; i>=0; i--) cout << *(ptr + i) << " ";
+    return 0;
+}</pre>
+            <div class="example-box">Input: 3 / 1 2 3<br>Output: 3 2 1</div>
+            <hr>
+            <h3>3. 최빈값 구하기 (Mode)</h3>
+            <pre>#include &lt;iostream&gt;
+#include &lt;map&gt;
+using namespace std;
+int main() {
+    int n, x, maxC = 0, mode; cin >> n;
+    map&lt;int, int&gt; m;
+    for(int i=0; i&lt;n; i++) {
+        cin >> x; m[x]++;
+        if(m[x] > maxC) { maxC = m[x]; mode = x; }
+    }
+    cout << "최빈값: " << mode;
+    return 0;
+}</pre>
         </div>
 
-        <div class="code-item C#">
+        <div class="code-item lang-C#">
             <span class="tag">C#</span>
             <h3>배열 평균 계산</h3>
             <pre>using System;
@@ -112,74 +143,26 @@ class Program {
             <div class="example-box">Input: 2 / 10 25<br>Output: 17.50</div>
         </div>
 
-        <div class="code-item PY">
+        <div class="code-item lang-PY">
             <span class="tag">PY</span>
-            <h3>If문 & For문 성적 판별</h3>
-            <pre>scores = list(map(int, input("점수들을 입력: ").split()))
+            <h3>1. 내장 함수 정렬</h3>
+            <pre>n = int(input())
+data = list(map(int, input().split()))
+data.sort()
+print(*data)</pre>
+            <div class="example-box">Input: 4 / 4 1 3 2<br>Output: 1 2 3 4</div>
+            <hr>
+            <h3>2. If/For문 성적 판별</h3>
+            <pre>scores = list(map(int, input().split()))
 for s in scores:
-    if s >= 90: print(f"{s}: A")
-    elif s >= 80: print(f"{s}: B")
-    else: print(f"{s}: F")</pre>
-            <div class="example-box">Input: 95 82 70<br>Output: 95: A, 82: B, 70: F</div>
+    if s >= 90: print("A", end=" ")
+    elif s >= 80: print("B", end=" ")
+    else: print("F", end=" ")</pre>
+            <hr>
+            <h3>3. 최빈값 구하기 (Mode)</h3>
+            <pre>from collections import Counter
+data = list(map(int, input().split()))
+count = Counter(data)
+mode = count.most_common(1)[0][0]
+print(f"최빈값: {mode}")</pre>
         </div>
-
-        <div class="code-item HTML">
-            <span class="tag">HTML</span>
-            <h3>주요 태그 쓰임새</h3>
-            <pre>&lt;h2&gt;제목 2단계&lt;/h2&gt; &lt;div&gt;구역 나누기&lt;/div&gt; &lt;button&gt;버튼&lt;/button&gt; &lt;pre&gt;코드 표시&lt;/pre&gt; </pre>
-        </div>
-
-        <div class="code-item CSS">
-            <span class="tag">CSS</span>
-            <h3>자주 쓰는 스타일링</h3>
-            <pre>/* 1. 중앙 정렬 및 여백 */
-.box { margin: 0 auto; padding: 20px; }
-
-/* 2. Flexbox 레이아웃 (가로 정렬) */
-.container { display: flex; justify-content: space-between; }</pre>
-        </div>
-
-        <div class="code-item JAVA">
-            <span class="tag">JAVA</span>
-            <h3>기본 출력 및 객체 생성</h3>
-            <pre>// 1. Hello World
-public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello Java!");
-    }
-}
-
-// 2. Scanner 입력
-import java.util.Scanner;
-Scanner sc = new Scanner(System.in);
-int n = sc.nextInt();</pre>
-        </div>
-
-        <div class="code-item SETTINGS">
-            <span class="tag">SETTINGS</span>
-            <h3>🚀 업데이트 방법</h3>
-            <pre>git add .
-git commit -m "Update"
-git push</pre>
-        </div>
-
-    </div>
-
-    <script>
-        function filterSelection(c) {
-            var items = document.getElementsByClassName("code-item");
-            if (c == "all") c = "";
-            for (var i = 0; i < items.length; i++) {
-                items[i].style.display = "none";
-                if (items[i].className.indexOf(c) > -1) items[i].style.display = "block";
-            }
-            var btns = document.getElementById("menuBar").getElementsByTagName("button");
-            for (var i = 0; i < btns.length; i++) {
-                btns[i].classList.remove("active");
-                if (btns[i].innerText === (c === "" ? "ALL" : c)) btns[i].classList.add("active");
-            }
-        }
-        filterSelection('all');
-    </script>
-</body>
-</html>
