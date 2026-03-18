@@ -236,7 +236,7 @@ if n > 0:
 else: print("음수입니다")</pre>
             <div class="example-box output">Input: 5 -> Output: 0 1 2 3 4</div>
             <hr>
-            <h3>2. 두 수 사이의 소수 (함수형 프로그래밍 풀이)</h3>
+            <h3>4. 두 수 사이의 소수 (함수형 프로그래밍 풀이)</h3>
             <pre># 방법 1: 리스트 컴프리헨션 활용
 s, e = map(int, input().split())
 primes = [x for x in range(s, e + 1) if x > 1 and all(x % i != 0 for i in range(2, int(x**0.5) + 1))]
