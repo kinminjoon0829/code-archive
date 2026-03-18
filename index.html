@@ -256,6 +256,25 @@ public class Main {
    - 프로젝트 우클릭 > 속성 > C/C++ > 언어 > C++ 언어 표준: ISO C++20 표준
    - SDL 검사: 아니요 (/sdl-) (scanf 보안 경고 해결용)</pre>
             <hr>
+            <hr>
+            <h3>🌐 초도 설정: HTML 생성부터 배포까지</h3>
+            <pre>
+1. 로컬 작업:
+   - 폴더 생성 -> index.html 파일 생성 및 코드 작성
+2. GitHub 저장소(Repo) 생성:
+   - GitHub 사이트에서 [New repository] 클릭
+   - Repository name 입력 후 [Create]
+3. Git 초기 연결 (터미널/CMD):
+   - git init
+   - git remote add origin [내 저장소 주소]
+   - git add .
+   - git commit -m "Initial commit"
+   - git push -u origin main
+4. 웹 사이트 활성화:
+   - GitHub Repo > Settings > Pages
+   - Build and deployment > Branch를 [main]으로 설정 후 [Save]
+   - 약 1~2분 뒤 상단에 생성된 URL로 접속 확인</pre>
+            <div class="example-box">최초 1회 연결 후에는 아래의 Git 업데이트 명령어 3줄만 사용하면 됩니다.</div>
             <h3>🚀 Git 업데이트</h3>
             <pre>git add .
 git commit -m "Final Integrated Code"
