@@ -100,6 +100,22 @@ int main() {
     return 0;
 }</pre>
             <div class="example-box output">Input: 2 2 2 2 / 1 2 3 4 / 5 6 7 8 -> Output: 19 22 \n 43 50</div>
+            <hr>
+            <h3>5. 두 수 사이의 소수 (제곱근 최적화 풀이)</h3>
+            <pre>#include &lt;stdio.h&gt;
+int main() {
+    int start, end; scanf("%d %d", &start, &end);
+    for (int i = start; i <= end; i++) {
+        if (i < 2) continue;
+        int is_prime = 1;
+        for (int j = 2; j * j <= i; j++) { // 제곱근까지만 확인하여 성능 향상
+            if (i % j == 0) { is_prime = 0; break; }
+        }
+        if (is_prime) printf("%d ", i);
+    }
+    return 0;
+}</pre>
+            <div class="example-box output">Input: 10 30 -> Output: 11 13 17 19 23 29</div>
         </div>
 
         <div class="code-item C++">
@@ -159,6 +175,24 @@ int main() {
     return 0;
 }</pre>
             <div class="example-box output">Input: 3 / 10 20 30 -> Output: 30 20 10</div>
+            <hr>
+            <h3>5. 두 수 사이의 소수 (에라토스테네스의 체 풀이)</h3>
+            <pre>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+int main() {
+    int s, e; cin >> s >> e;
+    vector&lt;bool&gt; is_prime(e + 1, true);
+    is_prime[0] = is_prime[1] = false;
+    for (int i = 2; i * i <= e; i++) {
+        if (is_prime[i]) {
+            for (int j = i * i; j <= e; j += i) is_prime[j] = false;
+        }
+    }
+    for (int i = s; i <= e; i++) if (is_prime[i]) cout << i << " ";
+    return 0;
+}</pre>
+            <div class="example-box output">Input: 1 20 -> Output: 2 3 5 7 11 13 17 19</div>
         </div>
 
         <div class="code-item C#">
@@ -201,6 +235,16 @@ if n > 0:
     for i in range(n): print(i, end=" ")
 else: print("음수입니다")</pre>
             <div class="example-box output">Input: 5 -> Output: 0 1 2 3 4</div>
+            <hr>
+            <h3>2. 두 수 사이의 소수 (함수형 프로그래밍 풀이)</h3>
+            <pre># 방법 1: 리스트 컴프리헨션 활용
+s, e = map(int, input().split())
+primes = [x for x in range(s, e + 1) if x > 1 and all(x % i != 0 for i in range(2, int(x**0.5) + 1))]
+print(*(primes))
+
+# 방법 2: Filter 함수 활용
+# print(list(filter(lambda x: all(x % i != 0 for i in range(2, int(x**0.5)+1)) if x > 1 else False, range(s, e+1))))</pre>
+            <div class="example-box output">Input: 10 20 -> Output: 11 13 17 19</div>
         </div>
 
         <div class="code-item HTML">
@@ -256,7 +300,6 @@ public class Main {
    - 프로젝트 우클릭 > 속성 > C/C++ > 언어 > C++ 언어 표준: ISO C++20 표준
    - SDL 검사: 아니요 (/sdl-) (scanf 보안 경고 해결용)</pre>
             <hr>
-            <hr>
             <h3>🌐 초도 설정: HTML 생성부터 배포까지</h3>
             <pre>
 1. 로컬 작업:
@@ -275,6 +318,7 @@ public class Main {
    - Build and deployment > Branch를 [main]으로 설정 후 [Save]
    - 약 1~2분 뒤 상단에 생성된 URL로 접속 확인</pre>
             <div class="example-box">최초 1회 연결 후에는 아래의 Git 업데이트 명령어 3줄만 사용하면 됩니다.</div>
+            <hr>
             <h3>🚀 Git 업데이트</h3>
             <pre>git add .
 git commit -m "Final Integrated Code"
